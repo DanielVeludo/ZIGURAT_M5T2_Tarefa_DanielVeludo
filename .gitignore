@@ -1,0 +1,16 @@
+# Outputs gerados pelo sistema
+relatorio_final.txt
+relatorio_inspector.docx
+checklist_conformidade.xlsx
+log_inspector.json
+
+# Python
+__pycache__/
+*.pyc
+.env
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+
+# MacOS
+.DS_Store
