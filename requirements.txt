@@ -1,0 +1,8 @@
+streamlit
+langgraph
+langchain
+langchain-anthropic
+anthropic
+ifcopenshell
+openpyxl
+python-docx
