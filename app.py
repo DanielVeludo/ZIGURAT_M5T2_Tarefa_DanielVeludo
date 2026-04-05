@@ -51,7 +51,7 @@ END
 # ============================================================
 # Instalação das bibliotecas necessárias (Google Colab)
 # ============================================================
-!pip install langgraph langchain langchain-anthropic anthropic ifcopenshell pandas openpyxl python-docx -q
+pip install langgraph langchain langchain-anthropic anthropic ifcopenshell pandas openpyxl python-docx -q
 
 # ============================================================
 # Configuração da API Key (Anthropic / Claude)
