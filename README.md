@@ -10,7 +10,7 @@ Módulo 5 — Tema 2: Agentic IA | Tarefa Individual | Daniel Veludo
 
 Sistema multi-agente em LangGraph que lê um modelo IFC de uma edificação agrícola e verifica automaticamente a sua conformidade com a legislação portuguesa aplicável, produzindo documentação técnica estruturada.
 
-O caso de estudo é a Casa de Máquinas da Quinta do Panascal (Valença do Douro), exportada do Autodesk Revit 2026 em formato IFC2X3.
+O caso de estudo é a Casa de Máquinas da Quinta do Panascal (Valença do Douro, Portugal), exportada do Autodesk Revit 2026 em formato IFC2X3.
 
 O sistema executa cinco agentes em sequência:
 
@@ -18,7 +18,7 @@ O sistema executa cinco agentes em sequência:
 2. Agente Verificador — aplica critérios de conformidade com base em legislação portuguesa (DL 163/2006, DL 173/2005, DL 347/93, Portaria 702/80)
 3. Agente Quantificador — calcula medições de todos os elementos construtivos
 4. Agente Recomendações (condicional) — invoca o Claude para gerar recomendações técnicas, apenas se existirem não conformidades
-5. Agente Sintetizador — usa o histórico de mensagens para gerar o relatório final via LLM e produz os três entregáveis
+5. Agente Sintetizador — usa o histórico de mensagens entre os agentes para gerar o relatório final via LLM e produz os três entregáveis
 
 Os entregáveis produzidos são um relatório Word (.docx), uma checklist Excel (.xlsx) e um log estruturado (.json).
 
@@ -35,12 +35,6 @@ ifcopenshell
 openpyxl
 python-docx
 pandas
-```
-
-Instalação (Google Colab ou ambiente local):
-
-```bash
-pip install langgraph langchain langchain-anthropic anthropic ifcopenshell pandas openpyxl python-docx
 ```
 
 É necessária uma API Key da Anthropic para o Agente de Recomendações e o Agente Sintetizador invocarem o Claude. Os restantes agentes funcionam sem API Key.
@@ -62,22 +56,26 @@ Após a execução, a última célula faz o download automático dos três fiche
 
 ### Ambiente Local
 
+No terminal, instalar as dependências e abrir o notebook:
+
 ```bash
 # 1. Instalar dependências
 pip install langgraph langchain langchain-anthropic anthropic ifcopenshell pandas openpyxl python-docx
 
-# 2. Definir a API Key
-export ANTHROPIC_API_KEY="sk-ant-..."
-
-# 3. Abrir o notebook
+# 2. Abrir o notebook
 jupyter notebook M5T2_Tarefa_Daniel_Veludo.ipynb
 ```
 
-Na célula de configuração da API Key, substituir o bloco `from google.colab import userdata` por:
+3. No notebook, configurar a API Key — escolher uma das duas opções:
 
-```python
-os.environ["ANTHROPIC_API_KEY"] = "sk-ant-..."
-```
+   Opção A — via Google Colab Secrets (recomendado): No painel lateral, ir ao separador `Secrets` (ícone de cadeado) e adicionar um novo secret com o nome `ANTHROPIC_API_KEY` e o valor da chave Anthropic. O notebook lê-a automaticamente com `userdata.get('ANTHROPIC_API_KEY')`.
+
+   Opção B — directamente no notebook: Localizar a célula de configuração da API Key, substituir o bloco `from google.colab import userdata` e definir a chave directamente:
+   ```python
+   os.environ["ANTHROPIC_API_KEY"] = "sk-ant-..."
+   ```
+
+   > **Nota (ambiente local):** Podes também definir a chave no terminal antes de abrir o notebook — `export ANTHROPIC_API_KEY="sk-ant-..."` em Linux/macOS ou `set ANTHROPIC_API_KEY=sk-ant-...` em Windows (CMD).
 
 ---
 
